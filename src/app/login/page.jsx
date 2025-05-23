@@ -1,12 +1,10 @@
+
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '../../lib/firebase';
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { Checkbox } from "@/components/ui/checkbox"
-import { db } from '../../lib/firebase';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import Navbar from '../../components/landingpage/Navbar';
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import Link from 'next/link';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -15,149 +13,191 @@ export default function Login() {
   const [error, setError] = useState('');
   const router = useRouter();
 
-  const checkUserExists = async (email) => {
-    try {
-      const usersRef = collection(db, 'users');
-      const q = query(usersRef, where("email", "==", email));
-      const querySnapshot = await getDocs(q);
-      return !querySnapshot.empty;
-    } catch (error) {
-      console.error("Error checking user existence:", error);
-      throw new Error('Unable to verify account status');
-    }
-  };
-
   const handleEmailLogin = async (e) => {
     e.preventDefault();
+    setError('');
     try {
-      setError('');
-      
-
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/');
+      router.push('/dashboard');
     } catch (error) {
-      if (error.code === 'auth/invalid-credential') {
-        setError('Invalid email or password');
-      } else if (error.code === 'auth/too-many-requests') {
-        setError('Too many failed attempts. Please try again later');
-      } 
-      else if(error.code === 'auth/user-not-found') {
-        setError('No account found with this email. Please sign up first.');
-      }
-      else {
-        setError('An error occurred. Please try again');
-      }
-      console.error("Error logging in with email and password", error);
+      setError('Invalid email or password');
     }
   };
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
+    setError('');
     try {
-      setError('');
-      
-      // First authenticate with Google
-      const result = await signInWithPopup(auth, provider);
-      
-      // Check if user exists in database
-      const userExists = await checkUserExists(result.user.email);
-      if (!userExists) {
-        // Sign out the user since they don't have an account
-        await signOut(auth);
-        setError('No account found with this email. Please sign up first.');
-        return;
-      }
-
-      router.push('/');
+      await signInWithPopup(auth, provider);
+      router.push('/dashboard');
     } catch (error) {
-      setError('Failed to login with Google. Please try again');
-      console.error("Error logging in with Google", error);
+      setError('Failed to login with Google');
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#111111]">
-      <Navbar />
-      <div className="flex items-center justify-center py-8 pt-24">
-        <div className="max-w-6xl w-full bg-[#1A1A1A] shadow-xl rounded-lg flex my-2">
-          <div className="w-3/5 p-16">
-            <h1 className="text-4xl font-poppins mb-8 text-[50px] font-semibold text-white">
-              Welcome Back
-            </h1>
-            <p className="text-[#9CA3AF] mb-8 font-poppins font-light text-[20px]">
+    <div className="min-h-screen bg-black">
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <Link href="/" className="flex items-center space-x-3">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 shadow-lg" />
+            <span className="text-2xl font-extrabold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent tracking-tight">
+              Lectura
+            </span>
+          </Link>
+          <div className="hidden lg:flex items-center space-x-8">
+            {/* Dashboard */}
+            <Link href="/dashboard" className="group flex flex-col items-center justify-center relative">
+              <span className="flex items-center space-x-2 font-medium text-white transition-colors duration-300 group-hover:text-blue-400">
+                <svg className="w-6 h-6 text-blue-400 group-hover:scale-125 group-hover:-translate-y-1 group-hover:text-blue-500 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                  <rect x="2" y="2" width="6" height="6" rx="2"/>
+                  <rect x="12" y="2" width="6" height="6" rx="2"/>
+                  <rect x="12" y="12" width="6" height="6" rx="2"/>
+                  <rect x="2" y="12" width="6" height="6" rx="2"/>
+                </svg>
+                <span>Dashboard</span>
+              </span>
+              <span className="block h-[3px] w-0 group-hover:w-8 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full transition-all duration-300 mt-1"></span>
+            </Link>
+            {/* Upload Notes */}
+            <Link href="/upload" className="group flex flex-col items-center justify-center relative">
+              <span className="flex items-center space-x-2 font-medium text-white transition-colors duration-300 group-hover:text-yellow-400">
+                <svg className="w-6 h-6 text-yellow-400 group-hover:scale-125 group-hover:-translate-y-1 group-hover:text-yellow-500 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M12 4v16m8-8H4" stroke="currentColor" strokeLinecap="round"/>
+                </svg>
+                <span>Upload Notes</span>
+              </span>
+              <span className="block h-[3px] w-0 group-hover:w-8 bg-gradient-to-r from-yellow-400 to-yellow-300 rounded-full transition-all duration-300 mt-1"></span>
+            </Link>
+            {/* Generate Notes */}
+            <Link href="/generate" className="group flex flex-col items-center justify-center relative">
+              <span className="flex items-center space-x-2 font-medium text-white transition-colors duration-300 group-hover:text-green-400">
+                <svg className="w-6 h-6 text-green-400 group-hover:scale-125 group-hover:-translate-y-1 group-hover:text-green-500 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                  <path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span>Generate Notes</span>
+              </span>
+              <span className="block h-[3px] w-0 group-hover:w-8 bg-gradient-to-r from-green-400 to-green-300 rounded-full transition-all duration-300 mt-1"></span>
+            </Link>
+          </div>
+          <div className="hidden lg:flex items-center space-x-3">
+            <Link href="/login" className="text-white hover:text-blue-400 transition">Login</Link>
+            <Link
+              href="/signup"
+              className="px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-600 transition-all duration-300"
+            >
+              Sign Up
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="flex min-h-screen pt-24 items-center justify-center">
+        <div className="w-full max-w-4xl mx-auto flex flex-col md:flex-row bg-[#18181b] rounded-lg shadow-xl overflow-hidden border border-[#222]">
+          {/* Left: Form */}
+          <div className="w-full md:w-3/5 p-10 flex flex-col justify-center">
+            <h1 className="text-4xl font-bold text-white mb-2">Welcome Back</h1>
+            <p className="text-gray-400 mb-8">
               Log in to access your personalized study materials and tools.
             </p>
-            <button
-              onClick={handleGoogleLogin}
-              className="w-full py-5 px-4 mb-8 bg-[#2A2A2A] border border-[#333333] text-white rounded-full flex items-center justify-center shadow-sm hover:shadow-xl transition duration-300"
-            >
-              <img
-                src="/signup/google-icon.svg"
-                alt="Google Icon"
-                className="h-6 mr-2"
-              />
-              Continue with Google
-            </button>
-            <div className="flex items-center justify-between mb-4">
-              <hr className="w-1/3 border-[#333333]" />
-              <span className="text-[#9CA3AF]">OR</span>
-              <hr className="w-1/3 border-[#333333]" />
+
+            {/* Google Login Button with Gradient Border */}
+            <div className="relative rounded-full p-[2px] bg-gradient-to-r from-blue-500 to-purple-500 mb-8">
+              <button
+                onClick={handleGoogleLogin}
+                className="w-full flex items-center justify-center py-3 bg-[#18181b] rounded-full text-white hover:bg-[#18181b]/90 transition"
+              >
+                <span className="mr-3">
+                  <svg width="20" height="20" viewBox="0 0 20 20">
+                    <g>
+                      <path fill="#4285F4" d="M19.6 10.23c0-.68-.06-1.36-.18-2H10v3.78h5.5c-.24 1.3-.97 2.4-2.07 3.13v2.6h3.34c1.95-1.8 3.08-4.46 3.08-7.51z"/>
+                      <path fill="#34A853" d="M10 20c2.7 0 4.96-.9 6.62-2.43l-3.34-2.6c-.93.62-2.12.99-3.28.99-2.52 0-4.66-1.7-5.42-3.99H1.1v2.5C2.76 17.98 6.13 20 10 20z"/>
+                      <path fill="#FBBC05" d="M4.58 11.97A5.98 5.98 0 014 10c0-.68.12-1.33.32-1.97V5.53H1.1A9.98 9.98 0 000 10c0 1.57.38 3.05 1.1 4.47l3.48-2.5z"/>
+                      <path fill="#EA4335" d="M10 4.02c1.47 0 2.8.5 3.85 1.5l2.89-2.89C15.95 1.14 13.6 0 10 0 6.13 0 2.76 2.02 1.1 5.53l3.48 2.5C5.34 6.7 7.48 4.02 10 4.02z"/>
+                    </g>
+                  </svg>
+                </span>
+                Continue with Google
+              </button>
             </div>
-            <form className="space-y-8" onSubmit={handleEmailLogin}>
-              <input
-                type="email"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full py-4 px-4 border border-[#333333] bg-[#2A2A2A] text-white rounded-lg focus:outline-none focus:ring focus:ring-[#4B5563] placeholder-[#9CA3AF]"
-              />
-              <div className="space-y-2">
+
+            <div className="flex items-center justify-between mb-6">
+              <hr className="w-1/3 border-[#333]" />
+              <span className="text-gray-400 px-3">OR</span>
+              <hr className="w-1/3 border-[#333]" />
+            </div>
+
+            <form onSubmit={handleEmailLogin} className="space-y-5">
+              {/* Email Input with Gradient Border */}
+              <div className="relative rounded-md p-[2px] bg-gradient-to-r from-blue-500 to-purple-500">
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full py-3 px-4 bg-[#18181b] text-white rounded-md focus:outline-none placeholder-gray-400 border-none"
+                  required
+                />
+              </div>
+
+              {/* Password Input with Gradient Border */}
+              <div className="relative rounded-md p-[2px] bg-gradient-to-r from-blue-500 to-purple-500">
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full py-4 px-4 border border-[#333333] bg-[#2A2A2A] text-white rounded-lg focus:outline-none focus:ring focus:ring-[#4B5563] placeholder-[#9CA3AF]"
+                  className="w-full py-3 px-4 bg-[#18181b] text-white rounded-md focus:outline-none placeholder-gray-400 border-none"
+                  required
                 />
-                <div className="flex items-center space-x-2">
-                  <Checkbox
+                <div className="flex items-center mt-2 px-2">
+                  <input
+                    type="checkbox"
                     id="showPassword"
+                    className="accent-blue-400 mr-2"
                     checked={showPassword}
-                    onCheckedChange={setShowPassword}
-                    className="border-[#333333] data-[state=checked]:bg-white data-[state=checked]:text-black transition-all duration-200 hover:scale-110 data-[state=checked]:scale-105 hover:border-white"
+                    onChange={() => setShowPassword(!showPassword)}
                   />
-                  <label
-                    htmlFor="showPassword"
-                    className="text-sm font-medium leading-none text-[#9CA3AF] peer-disabled:cursor-not-allowed peer-disabled:opacity-70 transition-colors duration-200 hover:text-white"
-                  >
+                  <label htmlFor="showPassword" className="text-sm text-[#b3b3b3]">
                     Show password
                   </label>
                 </div>
               </div>
+
+              {/* Error Message */}
+              {error && (
+                <div className="p-3 text-blue-400 bg-blue-400/10 rounded-md text-sm">
+                  {error}
+                </div>
+              )}
+
+              {/* Gradient Login Button */}
               <button
                 type="submit"
-                className="w-full py-4 px-4 bg-white text-black font-bold rounded-lg hover:bg-gray-100 transition duration-300"
+                className="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-md hover:from-purple-600 hover:to-blue-600 transition-colors"
               >
                 Log In
               </button>
             </form>
-            {error && (
-              <div className="mt-4 p-3 bg-red-500/10 border border-red-500/50 rounded-lg">
-                <p className="text-red-500 text-sm text-center">{error}</p>
-              </div>
-            )}
-            <p className="text-sm text-[#9CA3AF] mt-4">
+
+            <p className="mt-6 text-sm text-[#b3b3b3]">
               Don’t have an account?{' '}
-              <a href="/signup" className="underline hover:text-white transition duration-300">
+              <Link href="/signup" className="text-blue-400 underline hover:text-purple-400 transition">
                 Sign Up
-              </a>
+              </Link>
             </p>
           </div>
-          <div className="w-2/5 bg-[#1A1A1A] flex items-center justify-center p-14 overflow-hidden">
+
+          {/* Right: Vibrant Geometric Illustration */}
+          <div className="hidden md:flex md:w-2/5 items-center justify-center bg-[#18181b]">
             <img
-              src="/signup/illustration.svg"
-              alt="Illustration"
-              className="w-full scale-125 object-contain"
+              src="/vibrant-geo.svg"
+              alt="Vibrant Geometric Illustration"
+              className="w-full h-[480px] object-contain"
+              style={{ maxWidth: '520px', maxHeight: '520px' }}
             />
           </div>
         </div>

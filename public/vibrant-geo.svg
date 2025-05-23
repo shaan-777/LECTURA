@@ -1,0 +1,83 @@
+<svg width="520" height="520" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="520" rx="60" fill="#18181b"/>
+  <!-- Rotating star layer -->
+  <g>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 260 260" to="360 260 260" dur="14s" repeatCount="indefinite"/>
+      <polygon points="260,90 295,210 420,210 315,270 350,390 260,320 170,390 205,270 100,210 225,210"
+        fill="url(#starGrad)" opacity="0.7" filter="url(#glow1)"/>
+    </g>
+  </g>
+  <!-- Pulsing central orb -->
+  <circle cx="260" cy="260" r="54" fill="url(#orbGrad)">
+    <animate attributeName="r" values="54;66;54" dur="2.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="2.8s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Rotating hexagon layer -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="360 260 260" to="0 260 260" dur="11s" repeatCount="indefinite"/>
+    <polygon points="260,160 335,200 335,280 260,320 185,280 185,200" fill="none" stroke="url(#hexGrad)" stroke-width="9" opacity="0.7"/>
+  </g>
+  <!-- Orbiting glowing dots -->
+  <g>
+    <circle cx="260" cy="90" r="13" fill="#a855f7">
+      <animate attributeName="r" values="13;19;13" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="420" cy="210" r="11" fill="#f43f5e">
+      <animate attributeName="r" values="11;16;11" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="350" cy="390" r="10" fill="#facc15">
+      <animate attributeName="r" values="10;15;10" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="170" cy="390" r="10" fill="#22d3ee">
+      <animate attributeName="r" values="10;16;10" dur="2.1s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="100" cy="210" r="11" fill="#f43f5e">
+      <animate attributeName="r" values="11;17;11" dur="1.7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <!-- Pulsing and rotating ring -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 260 260" to="360 260 260" dur="7s" repeatCount="indefinite"/>
+    <ellipse cx="260" cy="260" rx="170" ry="60" fill="none" stroke="url(#ringGrad)" stroke-width="8" opacity="0.5">
+      <animate attributeName="rx" values="170;200;170" dur="2.5s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+  <!-- Vertical glowing lines -->
+  <rect x="255" y="60" width="10" height="400" rx="5" fill="url(#lineGrad)" opacity="0.25">
+    <animate attributeName="opacity" values="0.25;0.6;0.25" dur="2.2s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="60" y="255" width="400" height="10" rx="5" fill="url(#lineGrad2)" opacity="0.25">
+    <animate attributeName="opacity" values="0.25;0.6;0.25" dur="2.2s" repeatCount="indefinite"/>
+  </rect>
+  <defs>
+    <radialGradient id="orbGrad" cx="0.5" cy="0.5" r="0.5">
+      <stop stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#f43f5e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="starGrad" x1="260" y1="90" x2="260" y2="390" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f43f5e"/>
+      <stop offset="0.5" stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="hexGrad" x1="185" y1="200" x2="335" y2="280" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#facc15"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="90" y1="320" x2="430" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="260" y1="60" x2="260" y2="460" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a855f7"/>
+      <stop offset="1" stop-color="#f43f5e"/>
+    </linearGradient>
+    <linearGradient id="lineGrad2" x1="60" y1="260" x2="460" y2="260" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#facc15"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <filter id="glow1" x="60" y="60" width="400" height="400" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="#a855f7" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+</svg>
