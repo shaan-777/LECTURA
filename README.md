@@ -26,9 +26,9 @@ Students and professionals struggle to extract and retain key information from l
 
 TEAM MEMBERS:
 KRITH THAKKER
+ABDULLAH ANSARI
+MOHIT
 KAVYA KAPOOR
-NANDINI KATARIA
-KHUSHI PANWAR
 
 
 ## 🧠 Our Approach
