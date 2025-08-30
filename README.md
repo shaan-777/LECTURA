@@ -81,12 +81,7 @@ KAVYA KAPOOR
 ![Screenshot](public/step-4/3.png)
 
 
-## 📽️ Demo & Deliverables
 
-•⁠  ⁠*Demo Video Link:* [https://www.youtube.com/watch?v=eRe7w2I6CzE]  
-•⁠  ⁠*Pitch Deck / PPT Link:* [https://docs.google.com/presentation/d/1hIWxk1hUs1sc4iW7C5nHWVCxpmqBoAZx8lyaTqUZpmc/edit?usp=sharing]
-
----
 
 ## ✅ Tasks & Bonus Checklist
 
@@ -95,15 +90,6 @@ KAVYA KAPOOR
 - [✅] **All members of the team completed Bonus Task 2 - Signing up for Sprint.dev and filled the form (3 points)**  (Details in Participant Manual)
 
 ---
-
-## 🧪 How to Run the Project
-Either visit our live website at *[https://lectura-omega.vercel.app](https://lectura-omega.vercel.app)* or run the project locally by following the steps below:
-### Requirements:
-•⁠  ⁠Node.js  
-•⁠  ⁠Next.js  
-•⁠  ⁠Firebase account  
-•⁠  ⁠Groq API account  
-•⁠  ⁠Vercel/Render for deployment
 
 ### Local Setup:
 ```bash
