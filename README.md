@@ -24,11 +24,12 @@ Students and professionals struggle to extract and retain key information from l
 ### Team Name:  
 ⁠Scrappy Coders⁠
 
-### Team Members:  
-•⁠  ⁠Abdullah Ansari: *[https://www.linkedin.com/in/abdullah-ansari-b0a5a0276/]*  
-•⁠  ⁠Sparsh Gulati  *[https://www.linkedin.com/in/sparsh-gulati-665032287/]*  
-•⁠  Vasu Reena Kush Varshney *[www.linkedin.com/in/vasu-varshney-16b8a9278]*   
-•⁠  ⁠Mohit Mongia *[https://www.linkedin.com/in/mongia-mohit/]*
+TEAM MEMBERS:
+KRITH THAKKER
+KAVYA KAPOOR
+NANDINI KATARIA
+KHUSHI PANWAR
+
 
 ## 🧠 Our Approach
 
