@@ -7,7 +7,6 @@
 
 Problem Statement 1 - Weave Al magic with ***```Groq```***.       
 Build a creative and interactive multimodal application powered by Groq, leveraging its capabilities to solve real-world problems with a focus on user experience and innovation.
-
 ---
 ## 🎯 Objective
 
