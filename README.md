@@ -7,7 +7,6 @@ Problem Statement 1 - Weave Al magic with ***```Groq```***.
 Build a creative and interactive multimodal application powered by Groq, leveraging its capabilities to solve real-world problems with a focus on user experience and innovation.
 ---
 ## 🎯 Objective
-
 Students and professionals struggle to extract and retain key information from lengthy YouTube videos, especially when preparing for exams or learning new technologies. Lectura addresses this by automating the creation of structured notes, flashcards, and practice tests with AI, enabling efficient, personalized, and multilingual learning support.
 ---
 ## 🧠 Team & Approach
