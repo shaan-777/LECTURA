@@ -10,7 +10,6 @@ Build a creative and interactive multimodal application powered by Groq, leverag
 
 Students and professionals struggle to extract and retain key information from lengthy YouTube videos, especially when preparing for exams or learning new technologies. Lectura addresses this by automating the creation of structured notes, flashcards, and practice tests with AI, enabling efficient, personalized, and multilingual learning support.
 ---
-
 ## 🧠 Team & Approach
 
 ### Team Name:  
