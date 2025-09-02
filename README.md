@@ -2,7 +2,6 @@
 
 # 🚀 Lectura
 
-
 	⁠An AI-powered adaptive learning platform that transforms educational videos into structured notes, flashcards, and practice tests.
 
 ---
