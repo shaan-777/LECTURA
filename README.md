@@ -12,8 +12,7 @@ Students and professionals struggle to extract and retain key information from l
 ---
 ## 🧠 Team & Approach
 ### Team Name:  
-⁠Scrappy Coders⁠
-
+⁠LOCALHOST
 TEAM MEMBERS:
 KRITH THAKKER
 ABDULLAH ANSARI
