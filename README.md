@@ -1,5 +1,4 @@
 ![github-submission-banner](https://github.com/user-attachments/assets/a1493b84-e4e2-456e-a791-ce35ee2bcf2f)
-
 # 🚀 Lectura
 	⁠An AI-powered adaptive learning platform that transforms educational videos into structured notes, flashcards, and practice tests.
 ---
